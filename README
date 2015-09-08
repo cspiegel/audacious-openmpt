@@ -1,0 +1,24 @@
+This is a libopenmpt-based module plugin for the Audacious media player.
+
+To build, both libopenmpt (http://lib.openmpt.org/libopenmpt/) and
+audacious are required.  For vendors who create separate development
+versions of packages, the development versions of both libraries are
+required.  These will likely have a name like audacious-dev or
+audacious-devel.
+
+GNU make is required, as is a compiler that supports C++11.  Recent
+versions of GCC and Clang are both supported.  Other C++11 compilers
+should work, too, but may require the tweaking of compiler.mk.
+
+Once dependencies are installed, build as follows:
+
+$ make
+
+To install:
+
+$ make install
+
+This installs the plugin into Audacious's input plugin directory.  To
+install to a staging area, such as for packaging:
+
+$ make install DESTDIR=/path/to/staging
