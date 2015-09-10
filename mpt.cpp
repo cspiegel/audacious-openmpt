@@ -25,6 +25,7 @@
  */
 
 #include <cctype>
+#include <cstdint>
 #include <cstring>
 #include <iostream>
 #include <memory>
@@ -131,7 +132,7 @@ class MPTPlugin : public InputPlugin
         while(!check_stop())
         {
           unsigned char buffer[65536];
-          size_t n;
+          std::int64_t n;
           int seek_value = check_seek();
 
           if(seek_value >= 0) mpt.seek(seek_value);

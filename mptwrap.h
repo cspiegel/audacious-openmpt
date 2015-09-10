@@ -27,12 +27,14 @@
 #ifndef QMMP_MPT_MPTWRAP_H
 #define QMMP_MPT_MPTWRAP_H
 
+#include <cstddef>
 #include <cstdint>
 #include <exception>
 #include <string>
 #include <vector>
 
 #include <libaudcore/vfs.h>
+
 #include <libopenmpt/libopenmpt.h>
 #include <libopenmpt/libopenmpt_stream_callbacks_file.h>
 
@@ -66,7 +68,7 @@ class MPTWrap
     static int default_stereo_separation();
     void set_stereo_separation(int);
 
-    size_t read(void *, size_t);
+    std::int64_t read(void *, std::int64_t);
     void seek(int pos);
 
     int rate() { return 44100; }
@@ -84,13 +86,11 @@ class MPTWrap
     std::string comment() { return comment_; }
 
   private:
-    void startup();
-
     std::string copystr(const char *);
 
-    static size_t stream_read(void *, void *, size_t);
+    static std::size_t stream_read(void *, void *, std::size_t);
     static int stream_seek(void *, std::int64_t, int);
-    static int64_t stream_tell(void *);
+    static std::int64_t stream_tell(void *);
     static VFSFile *VFS(void *instance) { return reinterpret_cast<VFSFile *>(instance); }
 
     openmpt_stream_callbacks callbacks = { stream_read, stream_seek, stream_tell };

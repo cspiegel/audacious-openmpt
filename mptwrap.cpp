@@ -24,6 +24,7 @@
  * SUCH DAMAGE.
  */
 
+#include <cstdint>
 #include <cstdio>
 #include <algorithm>
 #include <string>
@@ -67,7 +68,7 @@ MPTWrap::~MPTWrap()
   openmpt_module_destroy(mod);
 }
 
-size_t MPTWrap::stream_read(void *instance, void *buf, size_t n)
+size_t MPTWrap::stream_read(void *instance, void *buf, std::size_t n)
 {
   return VFS(instance)->fread(buf, 1, n);
 }
@@ -93,7 +94,7 @@ int MPTWrap::stream_seek(void *instance, std::int64_t offset, int whence)
   return VFS(instance)->fseek(offset, w) >= 0 ? 0 : -1;
 }
 
-int64_t MPTWrap::stream_tell(void *instance)
+std::int64_t MPTWrap::stream_tell(void *instance)
 {
   return VFS(instance)->ftell();
 }
@@ -158,10 +159,10 @@ void MPTWrap::set_stereo_separation(int separation)
   }
 }
 
-size_t MPTWrap::read(void *buf, size_t bufsiz)
+std::int64_t MPTWrap::read(void *buf, std::int64_t bufsiz)
 {
   bufsiz /= sizeof(float) * channels();
-  size_t n;
+  std::size_t n;
 
   n = openmpt_module_read_interleaved_float_stereo(mod, rate(), bufsiz, reinterpret_cast<float *>(buf));
 
