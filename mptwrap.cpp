@@ -102,9 +102,16 @@ std::int64_t MPTWrap::stream_tell(void *instance)
 
 std::string MPTWrap::copystr(const char *src)
 {
-  std::string dst = src;
-  openmpt_free_string(src);
-  return dst;
+  if(src != nullptr)
+  {
+    std::string dst = src;
+    openmpt_free_string(src);
+    return dst;
+  }
+  else
+  {
+    return "";
+  }
 }
 
 std::vector<MPTWrap::Interpolator> MPTWrap::get_interpolators()
