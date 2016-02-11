@@ -36,9 +36,10 @@
 
 #include "mptwrap.h"
 
-MPTWrap::MPTWrap(VFSFile &file) : mod(openmpt_module_create(callbacks, &file, openmpt_log_func_silent, NULL, NULL))
+MPTWrap::MPTWrap(VFSFile &file)
 {
-  if(mod == NULL) throw InvalidFile();
+  mod = openmpt_module_create(callbacks, &file, openmpt_log_func_silent, nullptr, nullptr);
+  if(mod == nullptr) throw InvalidFile();
 
   openmpt_module_select_subsong(mod, -1);
 
