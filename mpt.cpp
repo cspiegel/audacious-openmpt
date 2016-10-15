@@ -98,10 +98,8 @@ class MPTPlugin : public InputPlugin
       }
     }
 
-    Tuple read_tuple(const char *filename, VFSFile &file)
+    bool read_tag(const char *filename, VFSFile &file, Tuple &tuple, Index<char> *)
     {
-      Tuple tuple;
-
       try
       {
         MPTWrap mpt(file);
@@ -111,12 +109,13 @@ class MPTPlugin : public InputPlugin
         tuple.set_int(Tuple::Length, mpt.duration());
 
         if(!mpt.title().empty()) tuple.set_str(Tuple::Title, mpt.title().c_str());
+
+        return true;
       }
       catch(MPTWrap::InvalidFile)
       {
+        return false;
       }
-
-      return tuple;
     }
 
     bool play(const char *filename, VFSFile &file)
