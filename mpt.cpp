@@ -163,9 +163,9 @@ const char MPTPlugin::about[] = N_("Module player based on libopenmpt\n\nWritten
 const char *const MPTPlugin::exts[] =
 {
   "669", "amf", "ams", "dbm", "digi", "dmf", "dsm", "far", "gdm", "ice", "imf",
-  "it", "j2b", "m15", "mdl", "med", "mmcmp", "mod", "mptm", "mt2", "mtm", "nst",
-  "okt", "plm", "ppm", "psm", "ptm", "s3m", "st26", "stk", "stm", "ult", "umx",
-  "wow", "xm", "xpk",
+  "it", "j2b", "m15", "mdl", "med", "mmcmp", "mms", "mo3", "mod", "mptm", "mt2",
+  "mtm", "nst", "okt", "plm", "ppm", "psm", "pt36", "ptm", "s3m", "sfx", "sfx2",
+  "st26", "stk", "stm", "ult", "umx", "wow", "xm", "xpk",
   nullptr
 };
 
