@@ -8,7 +8,13 @@ endif
 
 CXXFLAGS+=	$(shell pkg-config $(PKG) --cflags) -g -DPACKAGE='"$(TARGET)"'
 LDADD=		$(shell pkg-config $(PKG) --libs)
-PLUGDIR=	$(shell pkg-config audacious --var=plugin_dir)/Input
+PLUGDIR=	$(shell pkg-config audacious --variable=plugin_dir)
+
+ifeq ($(PLUGDIR),)
+  $(error "Cannot find plugin directory")
+endif
+
+PLUGDIR:=	$(PLUGDIR)/Input
 
 %.o: %.cpp
 	$(CXX) $(OPT) $(CXXFLAGS) -fPIC -c $< -o $@
