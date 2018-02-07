@@ -4,7 +4,7 @@ To build, both libopenmpt (http://lib.openmpt.org/libopenmpt/) and
 audacious are required.  For vendors who create separate development
 versions of packages, the development versions of both libraries are
 required.  These will likely have a name like audacious-dev or
-audacious-devel.
+audacious-devel.  libopenmpt must be version 0.3 or greater.
 
 GNU make is required, as is a compiler that supports C++11.  Recent
 versions of GCC and Clang are both supported.  Other C++11 compilers
