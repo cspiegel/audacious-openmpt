@@ -1,0 +1,58 @@
+At the top level (where CMakeLists.txt is), create a directory called
+"aud", and in that directory, create two more directories called
+"include" and "lib".
+
+From an installed development version of Audacious 3.9, copy
+/usr/include/libaudcore (the full directory) into aud/include.
+
+Audacious requires gettext, which presumably is available for MinGW, but
+I haven't looked.  Instead, the following patch can be applied against
+include/libaudcore/i18n.h which disables i18n:
+
+================================================================================
+--- /usr/include/libaudcore/i18n.h	2017-08-19 18:16:47.000000000 -0700
++++ i18n.h	2018-02-06 21:14:24.134595714 -0800
+@@ -20,6 +20,7 @@
+ #ifndef AUDACIOUS_I18N_H
+ #define AUDACIOUS_I18N_H
+ 
++#if 0
+ #include <libintl.h>
+ 
+ #define _(String) dgettext (PACKAGE, String)
+@@ -28,5 +29,9 @@
+ #else
+ #define N_(String) (String)
+ #endif
++#else
++#define _(String) (String)
++#define N_(String) (String)
++#endif
+ 
+ #endif /* AUDACIOUS_I18N_H */
+================================================================================
+
+Download: https://distfiles.audacious-media-player.org/audacious-3.9a-win32.zip
+
+From this zip file:
+
+mv bin/libaudcore.dll aud/lib
+
+Download: https://lib.openmpt.org/files/libopenmpt/dev/libopenmpt-0.3.6+release.dev.winold.vs2017.zip
+
+From this zip file:
+
+mv inc/libopenmpt aud/libopenmpt
+mv bin/x86/libopenmpt.dll lib
+
+Now to build:
+
+mkdir build
+cd build
+cmake .. -DCMAKE_TOOLCHAIN_FILE=../Toolchain-mingw32.cmake
+
+This will produce cas-mpt.dll which needs to be copied into the Input
+plugins directory of Audacious.  It's possible that it requires other
+DLLs in order to run (there are several other DLLs that came with
+libopenmpt, for example), but I haven't actually tested this on a
+Windows system.
