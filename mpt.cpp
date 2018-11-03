@@ -92,7 +92,7 @@ class MPTPlugin : public InputPlugin
         MPTWrap mpt(file);
         return true;
       }
-      catch(MPTWrap::InvalidFile)
+      catch(const MPTWrap::InvalidFile &)
       {
         return false;
       }
@@ -112,7 +112,7 @@ class MPTPlugin : public InputPlugin
 
         return true;
       }
-      catch(MPTWrap::InvalidFile)
+      catch(const MPTWrap::InvalidFile &)
       {
         return false;
       }
@@ -151,7 +151,7 @@ class MPTPlugin : public InputPlugin
 
         return true;
       }
-      catch(MPTWrap::InvalidFile)
+      catch(const MPTWrap::InvalidFile &)
       {
         return false;
       }
