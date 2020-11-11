@@ -1,3 +1,7 @@
+[This will no longer be receiving updates, because it has been
+integrated into the official audacious-plugins, and will continue to be
+maintained there.]
+
 This is a libopenmpt-based module plugin for the Audacious media player.
 
 To build, both libopenmpt (http://lib.openmpt.org/libopenmpt/) and
